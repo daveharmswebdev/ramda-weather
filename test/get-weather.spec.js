@@ -4,7 +4,7 @@ const {expect} = require('chai')
 const weather = require('../data/weather')
 const getCity = require('../lib/getCity')
 const getDateRange = require('../lib/getDateRange')
-const { getDates } = require('../lib/helper-methods')
+const { getUTCDates } = require('../lib/helper-methods')
 
 describe('get city', () => {
 
@@ -20,18 +20,18 @@ describe('get city', () => {
 	it('return the city of nashville', () => {
 		expect(getCity(report)).to.equal('Nashville')
 	})
-	it('should return a list of dates in milliseconds', () => {
-		expect(getDates(report)).to.deep.equal([
-			1479747600, 
-			1479834000, 
-			1479920400, 
-			1480006800, 
-			1480093200,
-			1480179600,
-			1480266000
+	it('should return of list of dates in UTC', () => {
+		expect(getUTCDates(report)).to.deep.equal([
+			'Mon Nov 21 2016 11:00:00 GMT-0600 (CST)',
+			'Tue Nov 22 2016 11:00:00 GMT-0600 (CST)',
+			'Wed Nov 23 2016 11:00:00 GMT-0600 (CST)',
+			'Thu Nov 24 2016 11:00:00 GMT-0600 (CST)',
+			'Fri Nov 25 2016 11:00:00 GMT-0600 (CST)',
+			'Sat Nov 26 2016 11:00:00 GMT-0600 (CST)',
+			'Sun Nov 27 2016 11:00:00 GMT-0600 (CST)'
 		])
 	})
 	it('should return a date range', () => {
-		expect(getDateRange(report)).to.equal('Monday, Nov 21 to Sunday, Nov 27')
+		expect(getDateRange(report)).to.equal('Mon, Nov 21 to Sun, Nov 27')
 	})
 })
